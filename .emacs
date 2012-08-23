@@ -153,6 +153,11 @@ print a message in the minibuffer with the result."
 ;; set default indent level to 3
 (setq cperl-indent-level 3)
 
+;; set Block indenting for Parens
+(custom-set-variables
+ '(cperl-indent-parens-as-block t)
+ '(cperl-close-paren-offset -3))
+
 (load-file "/usr/share/emacs/23.3/lisp/progmodes/cperl-mode.elc")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
