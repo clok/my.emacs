@@ -2,6 +2,9 @@
 (add-to-list 'load-path "~/.emacs.d/erc")
 (add-to-list 'load-path "~/.emacs.d/")
 
+;; Indent with SPACES only, no TABS
+(setq indent-tabs-mode nil)
+
 ;; Set default tab width to 3
 (setq-default tab-width 3)
 
@@ -159,6 +162,7 @@ print a message in the minibuffer with the result."
  '(cperl-close-paren-offset -3))
 
 (load-file "/usr/share/emacs/23.3/lisp/progmodes/cperl-mode.elc")
+(add-to-list 'auto-mode-alist '("\\.t$" . cperl-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Mod Title bar to add Host name
