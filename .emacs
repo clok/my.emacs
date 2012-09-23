@@ -2,6 +2,9 @@
 (add-to-list 'load-path "~/.emacs.d/erc")
 (add-to-list 'load-path "~/.emacs.d/")
 
+;; Indent with SPACES only, no TABS
+(setq indent-tabs-mode nil)
+
 ;; Set default tab width to 3
 (setq-default tab-width 3)
 
@@ -78,16 +81,16 @@
 ;; Collapse all whitespace around the point to one space (C-c w)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun my-collapse-whitespace () 
-   "Reduce all whitespace surrounding point to a single space."
-   ;; @@ This seems to be quite buggy at the moment
-   (interactive)
-   (kill-region (progn (re-search-backward "[^ \t\r\n]") 
-                       (forward-char) 
-                       (point)) 
-                (progn (re-search-forward "[^ \t\r\n]") 
-                       (backward-char)
-                       (point)))
-   (insert-char ?\  1))
+  "Reduce all whitespace surrounding point to a single space."
+  ;; @@ This seems to be quite buggy at the moment
+  (interactive)
+  (kill-region (progn (re-search-backward "[^ \t\r\n]") 
+							 (forward-char) 
+							 (point)) 
+					(progn (re-search-forward "[^ \t\r\n]") 
+							 (backward-char)
+							 (point)))
+  (insert-char ?\  1))
 
 (global-set-key "\C-cw" 'my-collapse-whitespace)
 
@@ -102,8 +105,8 @@ print a message in the minibuffer with the result."
     (let ((count 0))
       (goto-char (point-min))
       (while (< (point) (point-max))
-	(forward-word 1)
-	(setq count (1+ count)))
+		  (forward-word 1)
+		  (setq count (1+ count)))
       (message "Buffer contains %d words." count))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -121,13 +124,13 @@ print a message in the minibuffer with the result."
 
 
 ;; For editing C files in OpenGL minor mode
- (add-hook 'c-mode-hook
-  	  '(lambda ()
-  	     (cond ((string-match "/\\([Oo]pen\\)?[Gg][Ll]/"
-  				  (buffer-file-name))
-  		    (require 'OpenGL)
- 		    (OpenGL-minor-mode 1)
-		    (OpenGL-setup-keys)))))
+(add-hook 'c-mode-hook
+			 '(lambda ()
+				 (cond ((string-match "/\\([Oo]pen\\)?[Gg][Ll]/"
+											 (buffer-file-name))
+						  (require 'OpenGL)
+						  (OpenGL-minor-mode 1)
+						  (OpenGL-setup-keys)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PERL Goodies
@@ -158,6 +161,9 @@ print a message in the minibuffer with the result."
  '(cperl-indent-parens-as-block t)
  '(cperl-close-paren-offset -3))
 
+;; Adding *.t files to cperl-mode detectiong for Unit Test Files
+(add-to-list 'auto-mode-alist '("\\.t$" . cperl-mode))
+
 (load-file "/usr/share/emacs/23.3/lisp/progmodes/cperl-mode.elc")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -168,9 +174,9 @@ print a message in the minibuffer with the result."
 
 (setq my-hostname 
       (replace-regexp-in-string "\\(^[[:space:]\n]*\\|[[:space:]\n]*$\\)" "" ;; like perl chomp()
-        (with-output-to-string 
-           (call-process "/bin/hostname" nil standard-output nil))))
-    (setq my-username (getenv "USERNAME"))
+										  (with-output-to-string 
+											 (call-process "/bin/hostname" nil standard-output nil))))
+(setq my-username (getenv "USERNAME"))
 (setq my-username (getenv "USERNAME"))
 (setq frame-title-format '("" "%b " my-username "@" my-hostname " v" emacs-version))
 
@@ -180,16 +186,16 @@ print a message in the minibuffer with the result."
 (add-to-list 'load-path "~/.emacs.d/coffee-mode")
 (require 'coffee-mode)
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
 (defun coffee-custom ()
   "coffee-mode-hook"
@@ -223,8 +229,8 @@ print a message in the minibuffer with the result."
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 
 (add-hook 'yaml-mode-hook
-    '(lambda ()
-        (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+			 '(lambda ()
+				 (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; protobuf Major Mode
@@ -237,7 +243,7 @@ print a message in the minibuffer with the result."
     (indent-tabs-mode . nil)))
 
 (add-hook 'protobuf-mode-hook
-	  (lambda () (c-add-style "my-style" my-protobuf-style t)))
+			 (lambda () (c-add-style "my-style" my-protobuf-style t)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; JSON Major Mode
