@@ -161,7 +161,6 @@ print a message in the minibuffer with the result."
  '(cperl-indent-parens-as-block t)
  '(cperl-close-paren-offset -3))
 
-(load-file "/usr/share/emacs/23.3/lisp/progmodes/cperl-mode.elc")
 (add-to-list 'auto-mode-alist '("\\.t$" . cperl-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -298,3 +297,8 @@ print a message in the minibuffer with the result."
                     inhibit-file-name-handlers)))
         (inhibit-file-name-operation operation))
     (apply operation args)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Ruby Genfiles open in Ruby Mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
