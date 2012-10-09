@@ -300,6 +300,15 @@ print a message in the minibuffer with the result."
     (apply operation args)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Enhanced Ruby Mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; must be added after any path containing old ruby-mode
+(add-to-list 'load-path "~/.emacs.d/enhanced-ruby-mode")
+;; so that still works if ruby points to ruby1.8 (requires >= ruby-1.9.2)
+(setq enh-ruby-program "/usr/local/bin/ruby")
+(require 'ruby-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ruby Genfiles open in Ruby Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
