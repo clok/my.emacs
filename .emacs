@@ -9,7 +9,7 @@
 (setq-default tab-width 3)
 
 ;; Set font to smaller size
-(set-face-attribute 'default nil :height 100)
+(set-face-attribute 'default nil :height 120)
 
 ;; Set shell colors.
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
