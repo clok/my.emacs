@@ -15,9 +15,6 @@
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
-;; Bind compile.
-(global-set-key "\C-x\C-k" 'compile)
-
 ;; Enable syntax hilighting.
 (global-font-lock-mode t)
 
