@@ -326,4 +326,4 @@ print a message in the minibuffer with the result."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'load-path "~/.emacs.d/perltidy-mode")
 (require 'perltidy)
-
+(global-set-key "\M-T" 'perltidy-buffer)
