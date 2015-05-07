@@ -227,19 +227,6 @@ print a message in the minibuffer with the result."
 				 (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; protobuf Major Mode
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/protobuf-mode")
-(add-to-list 'auto-mode-alist '("\\.proto$" . protobuf-mode))
-(require 'protobuf-mode)
-(defconst my-protobuf-style
-  '((c-basic-offset . 2)
-    (indent-tabs-mode . nil)))
-
-(add-hook 'protobuf-mode-hook
-			 (lambda () (c-add-style "my-style" my-protobuf-style t)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; JSON Major Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'load-path "~/.emacs.d/json-mode")
@@ -310,7 +297,11 @@ print a message in the minibuffer with the result."
 ;; Ruby Genfiles open in Ruby Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'auto-mode-alist '("Gemfile" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("Capfile" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.ru$" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rake$" . enh-ruby-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MARKDOWN Major Mode
@@ -325,6 +316,26 @@ print a message in the minibuffer with the result."
 (add-to-list 'load-path "~/.emacs.d/perltidy-mode")
 (require 'perltidy)
 (global-set-key "\M-T" 'perltidy-buffer)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; web-mode Major Mode (for JS, jsx, etc)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path "~/.emacs.d/web-mode")
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+(defadvice web-mode-highlight-part (around tweak-jsx activate)
+  (if (equal web-mode-content-type "jsx")
+      (let ((web-mode-enable-part-face nil))
+        ad-do-it)
+    ad-do-it))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; For Mac. Map home/end to begin/end line
