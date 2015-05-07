@@ -1,12 +1,12 @@
 ;; Add emacs paths.
 (add-to-list 'load-path "~/.emacs.d/erc")
-(add-to-list 'load-path "~/.emacs.d/")
+;; (add-to-list 'load-path "~/.emacs.d/")
 
 ;; Indent with SPACES only, no TABS
 (setq indent-tabs-mode nil)
 
 ;; Set default tab width to 3
-(setq-default tab-width 3)
+(setq-default tab-width 2)
 
 ;; Set font to smaller size
 (set-face-attribute 'default nil :height 120)
@@ -171,8 +171,7 @@ print a message in the minibuffer with the result."
       (replace-regexp-in-string "\\(^[[:space:]\n]*\\|[[:space:]\n]*$\\)" "" ;; like perl chomp()
 										  (with-output-to-string 
 											 (call-process "/bin/hostname" nil standard-output nil))))
-(setq my-username (getenv "USERNAME"))
-(setq my-username (getenv "USERNAME"))
+(setq my-username (getenv "LOGNAME"))
 (setq frame-title-format '("" "%b " my-username "@" my-hostname " v" emacs-version))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -301,15 +300,17 @@ print a message in the minibuffer with the result."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; must be added after any path containing old ruby-mode
 (add-to-list 'load-path "~/.emacs.d/enhanced-ruby-mode")
+(autoload 'enh-ruby-mode "enh-ruby-mode" "Major mode for ruby files" t)
 ;; so that still works if ruby points to ruby1.8 (requires >= ruby-1.9.2)
-(setq enh-ruby-program "/usr/local/bin/ruby")
+(setq enh-ruby-program "/Users/clok/.rvm/rubies/ruby-2.2.0/bin/ruby")
 (require 'ruby-mode)
+(require 'enh-ruby-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ruby Genfiles open in Ruby Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.ru$" . enh-ruby-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MARKDOWN Major Mode
@@ -324,3 +325,9 @@ print a message in the minibuffer with the result."
 (add-to-list 'load-path "~/.emacs.d/perltidy-mode")
 (require 'perltidy)
 (global-set-key "\M-T" 'perltidy-buffer)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; For Mac. Map home/end to begin/end line
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-set-key (kbd "<home>") 'move-beginning-of-line)
+(global-set-key (kbd "<end>") 'move-end-of-line)
